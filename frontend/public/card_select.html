@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Selection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        position: relative;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .container {
+        background-image: url("img/background.jpg");
+        background-repeat: no-repeat;
+        animation: slide 10s linear infinite;
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        min-height: 120vh;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-sizing: border-box;
+      }
+
+      @keyframes slide {
+        0% {
+          background-position: 0 0;
+        }
+
+        50% {
+          background-position: 30% 0;
+          /* Move a little bit to the left */
+        }
+
+        100% {
+          background-position: 0 0;
+          /* Slide back to original position */
+        }
+      }
+
+      @font-face {
+        font-family: "Rocher";
+        src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+      }
+
+      @font-palette-values --Green {
+        font-family: Rocher;
+        base-palette: 5;
+      }
+
+      @font-palette-values --LightGreen {
+        font-family: Rocher;
+        base-palette: 2;
+      }
+
+      @font-palette-values --Yellow {
+        font-family: Rocher;
+        base-palette: 11;
+      }
+
+      .header {
+        font-family: "Rocher";
+        font-size: 70px;
+        font-palette: --Green;
+        margin-bottom: 10px;
+      }
+
+      #cardDeck {
+        width: 200px;
+        height: 310px;
+        border: 4px solid #000;
+        border-radius: 20px;
+        padding: 20px;
+        cursor: pointer;
+        margin: auto;
+        background-image: url("img/back.jpg");
+        /* Default card deck image */
+        background-size: cover;
+      }
+
+      #cardName {
+        margin-top: 10px;
+        font-size: 50px;
+        font-family: "Rocher";
+        text-align: center;
+        font-palette: --Yellow;
+      }
+
+      #cardDescription {
+        margin-top: 10px;
+        font-size: 40px;
+        text-align: center;
+        font-family: 'Prompt', sans-serif;
+        font-weight: bold;
+        color: #503b3b;
+        text-shadow: 0px 0px 0px #00ff00, 2px 2px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      .button-container {
+        margin-top: 10px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 30px;
+        margin-right: 20px;
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+      }
+
+      #cancelButton {
+        position: absolute;
+        top: 20px;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      #reset-button {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      #reset-button:hover {
+        background-color: #c0392b;
+      }
+
+      @media (max-width: 1024px) {
+        .header {
+          font-size: 50px;
+        }
+
+        #cardName {
+          margin-top: 20px;
+          font-size: 30px;
+        }
+
+        #cardDescription {
+          margin-top: 10px;
+          font-size: 30px;
+        }
+
+        .button-container {
+          margin-top: 15px;
+        }
+
+        .button {
+          padding: 7px 14px;
+          font-size: 1rem;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          margin-left: 15px;
+          margin-right: 5px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #reset-button {
+          padding: 7px 14px;
+          font-size: 1rem;
+        }
+
+        #cancelButton {
+          padding: 7px 14px;
+          font-size: 1rem;
+          right: 90px;
+        }
+
+        #cardDeck {
+          width: 140px;
+          height: 220px;
+          border: 3.2px solid #000;
+        }
+
+        .header {
+          font-size: 50px;
+        }
+
+        #cardName {
+          margin-top: 10px;
+          font-size: 40px;
+        }
+
+        #cardDescription {
+          margin-top: 10px;
+          font-size: 30px;
+        }
+      }
+
+      @media (max-width: 429px) {
+        #reset-button {
+          padding: 4px 8px;
+          font-size: 0.85rem;
+        }
+
+        #cancelButton {
+          padding: 4px 8px;
+          font-size: 0.85rem;
+          right: 75px;
+        }
+
+        #cardDeck {
+          width: 140px;
+          height: 220px;
+          border: 3.2px solid #000;
+        }
+
+        .header {
+          font-size: 35px;
+        }
+
+        #cardName {
+          margin-top: 20px;
+          font-size: 30px;
+        }
+
+        #cardDescription {
+          margin-top: 10px;
+          font-size: 24px;
+        }
+
+        .button-container {
+          margin-top: 15px;
+        }
+
+        .button {
+          padding: 7px 14px;
+          font-size: 1rem;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          margin-left: 15px;
+          margin-right: 5px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="header"><br />Card Selection</h1>
+      <button id="cancelButton" onclick="cancelSelection()">Cancel</button>
+      <button id="reset-button" onclick="resetGame()">Reset</button>
+      <div id="cardDeck" onclick="drawCard()"></div>
+      <div id="cardName"></div>
+      <div id="cardDescription"></div>
+      <div class="button-container" id="buttonContainer" style="display: none">
+        <button class="button" onclick="useCard()">Use</button>
+        <button class="button" onclick="discardCard()">Discard</button>
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const player_id = urlParams.get("player_id");
+      const player_number = urlParams.get("player_number");
+
+      setInterval(() => {
+        fetch(`http://localhost:3222/game`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.gameState == "choice_select") {
+              window.location.href = `http://localhost:3221/choice_select.html?player_id=${player_id}&player_number=${player_number}`;
+              return;
+            }
+            return;
+          });
+      }, 1000);
+
+      function drawCard() {        
+        fetch(
+          `http://localhost:3222/card/draw?player_id=${player_id}&isDraw=true`
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            const cardData = data.card;
+            console.log(cardData);
+            //console.log(`url("img/${cardData.name}.png")`);
+            document.getElementById("cardDeck").style.backgroundImage = `url("img/${cardData.name}.png")`;
+            document.getElementById("cardName").innerText = cardData.name;
+            document.getElementById("cardDescription").innerText = cardData.description;
+            document.getElementById("buttonContainer").style.display = "block";
+            document.getElementById("cancelButton").style.display = "none";
+            return;
+          });
+
+      }
+
+      function useCard() {
+        alert("Card used!");
+        resetCard();
+        fetch(
+          `http://localhost:3222/card/submit?player_id=${player_id}&isUse=true`
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log("Player " + player_number + " use a card");
+            return;
+          });
+      }
+
+      function discardCard() {
+        /*Add functionality for discarding the card here*/
+        alert("Card discarded!");
+        resetCard();
+        fetch(
+          `http://localhost:3222/card/submit?player_id=${player_id}&isUse=false`
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log("Player " + player_number + " discared a card");
+            return;
+          });
+      }
+
+      function resetCard() {
+        /* Reset card deck image and description */
+        document.getElementById("cardDeck").style.backgroundImage =
+          "url('card_back.png')";
+        document.getElementById("cardDescription").innerText = "";
+        /* Hide the button container */
+        document.getElementById("buttonContainer").style.display = "none";
+      }
+
+      function resetGame() {
+        alert("Resetting game...");
+        fetch(`http://localhost:3222/game/reset`)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            window.location.href = `http://localhost:3221/index.html`;
+          });
+      }
+
+      function cancelSelection() {
+        /*Redirect to choice_select.html*/
+
+        fetch(
+          `http://localhost:3222/card/draw?player_id=${player_id}&isDraw=false`
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log("Player " + player_number + " cancel selection");
+            return;
+          });
+      }
+        
+    </script>
+
+    
+  </body>
+</html>
